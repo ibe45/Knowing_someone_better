@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff4f6">
+<title>knowing someone better ❤️</title>
+<style>
+:root{--rose:#bd5874;--deep:#71384a;--ink:#3f3035;--muted:#846d74;--paper:#fffdfc;--pink:#fff1f4;--line:#f0dce2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#ffe6ed 0,transparent 36%),linear-gradient(145deg,#fff8f7,#fff0f4);font-family:ui-rounded,"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);min-height:100vh;padding:22px 14px 40px}
+.wrap{max-width:680px;margin:0 auto}.top{text-align:center;padding:22px 10px 18px}.heart{font-size:34px;filter:drop-shadow(0 5px 9px #eab2c0)}.eyebrow{text-transform:uppercase;letter-spacing:.19em;font-size:.7rem;color:var(--rose);font-weight:800;margin:10px 0}.top h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(2rem,8vw,3.1rem);line-height:1.08;color:var(--deep);margin:8px auto 12px;max-width:550px}.top p{color:var(--muted);line-height:1.65;max-width:500px;margin:0 auto}.card{background:rgba(255,253,252,.94);border:1px solid #f3dce3;border-radius:24px;padding:clamp(18px,5vw,32px);box-shadow:0 18px 50px #8c405014}.intro{display:grid;gap:14px}.note{background:var(--pink);border-radius:16px;padding:15px 17px;color:#79505e;line-height:1.6;font-size:.94rem}.btn{border:0;border-radius:14px;padding:14px 20px;font:inherit;font-weight:750;cursor:pointer;transition:transform .15s,filter .15s}.btn:hover{filter:brightness(.98);transform:translateY(-1px)}.primary{background:var(--rose);color:white;box-shadow:0 8px 18px #bd58742b}.secondary{background:#fff0f4;color:var(--deep);border:1px solid var(--line)}.full{width:100%}.progressline{height:6px;background:#f7e6eb;border-radius:10px;overflow:hidden;margin:0 0 10px}.progressfill{height:100%;background:linear-gradient(90deg,#e9a4b7,var(--rose));width:0;transition:width .25s}.progressmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem;margin-bottom:22px}.q{border-top:1px solid var(--line);padding:21px 0}.q:first-of-type{border-top:0;padding-top:2px}.q label,.q legend{font-weight:750;line-height:1.45;display:block;margin-bottom:12px}.qnum{display:inline-grid;place-items:center;background:#ffedf2;color:var(--rose);font-size:.78rem;width:29px;height:29px;border-radius:10px;margin-right:8px}.options{display:grid;gap:9px}.option{display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#fff;cursor:pointer;line-height:1.4}.option:has(input:checked){background:#fff0f4;border-color:#d88ba0}.option input{accent-color:var(--rose);margin-top:3px;flex-shrink:0}.q textarea,.q input[type=text]{width:100%;border:1px solid #e8d4db;border-radius:12px;padding:13px;font:inherit;background:#fffdfd;color:var(--ink);outline:none}.q textarea:focus,.q input:focus{border-color:var(--rose);box-shadow:0 0 0 3px #bd58741a}.q textarea{resize:vertical;min-height:90px}.small{font-size:.83rem;color:var(--muted);line-height:1.5}.actions{display:flex;gap:10px;margin-top:24px}.actions .btn{flex:1}.hidden{display:none!important}.end{text-align:center;padding:20px 2px}.end .big{font-size:46px}.end h2{font-family:Georgia,serif;font-size:2rem;font-weight:500;color:var(--deep)}.foot{text-align:center;font-size:.78rem;color:#987f87;padding:18px 8px}.error{color:#9b2744;background:#fff0f2;border-radius:10px;padding:12px;margin:12px 0}.required{color:var(--rose)}@media(max-width:420px){body{padding:12px 10px 28px}.top{padding-top:14px}.card{border-radius:19px}.actions{flex-direction:column}.actions .btn{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<div class="heart">♡</div><div class="eyebrow">a little heart-to-heart</div>
+<h1>knowing someone better</h1>
+<p>Because every beautiful connection starts with getting to know the person behind the smile. 💗</p>
+</header>
+<main class="card">
+<section id="welcome" class="intro">
+<div class="note">Hey you 😊<br>I've put together a few sweet questions because I'd love to know you a little better. There are no right or wrong answers — just be yourself, and answer whatever you're comfortable sharing.</div>
+<div><strong>Take your time.</strong><p class="small">Around 5–8 minutes · 20 questions · Just a little curiosity and a lot of good vibes.</p></div>
+<button class="btn primary full" id="startBtn" type="button">Let's begin 💌</button>
+<p class="small">Your answers will be submitted to the person who shared this link. You can leave any optional question blank.</p>
+</section>
+<form id="questionForm" class="hidden" method="post" target="submitFrame">
+<input type="hidden" name="payload" id="payload">
+<div class="progressline"><div class="progressfill" id="progressfill"></div></div>
+<div class="progressmeta"><span id="progressText">Question 1 of 20</span><span>♡ take your time</span></div>
+<div id="questions"></div>
+<div id="formError" class="error hidden" role="alert"></div>
+<div class="actions"><button class="btn secondary" id="backBtn" type="button">← Back</button><button class="btn primary" id="nextBtn" type="button">Next question →</button></div>
+<p class="small" style="margin-top:18px">Please answer honestly, but only share what feels comfortable. Your name is optional.</p>
+</form>
+<section id="submitting" class="end hidden"><div class="big">💌</div><h2>Sending your answers…</h2><p class="small">One little moment, please.</p></section>
+<section id="thanks" class="end hidden"><div class="big">💗</div><h2>Thank you for sharing!</h2><p>Your answers have been sent. I appreciate you taking a little time to let me know you better. Whatever grows from a genuine conversation is already something lovely. ✨</p><p class="small">Made with a little curiosity and a lot of warmth.</p></section>
+<section id="setupWarning" class="note hidden"></section>
+<iframe name="submitFrame" id="submitFrame" title="submission status" class="hidden"></iframe>
+</main>
+<footer class="foot">A gentle reminder: the best connections grow with honesty, kindness, and no pressure. ♡</footer>
+</div>
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnqmd0auzhcur0Og2ov8-cmyLsijgty3dLlfk3SMO6T3jEAhuZ-InlVM7Zvt_-vaZH7g/exec";
+const questions = [
+{t:"What's one little thing that can instantly make your day better?",p:"A song, a message, a meal, a person…",type:"text"},
+{t:"What's your idea of a perfect relaxed day together?",p:"Tell me what we'd do.",type:"text"},
+{t:"What kind of personality are you naturally drawn to?",type:"choice",o:["Funny and playful","Calm and caring","Confident and ambitious","Thoughtful and romantic","A mix of everything"]},
+{t:"Do you believe a strong connection can start from a simple conversation?",type:"choice",o:["Definitely","Sometimes","I'm not sure yet","I think it depends on the people"]},
+{t:"What's something people often misunderstand about you?",p:"Only share what you're comfortable with.",type:"text"},
+{t:"Which small gesture feels most romantic to you?",type:"choice",o:["A thoughtful message","Quality time together","Remembering little details","Words of reassurance","A surprise planned just for me"]},
+{t:"How do you usually show someone that you care?",type:"choice",o:["I make time for them","I check in and ask how they're doing","I help them when they need me","I express it in words","I show it in my own quiet way"]},
+{t:"What matters most to you when getting to know someone?",type:"choice",o:["Honesty","Effort and consistency","Humour and friendship","Emotional understanding","Shared values"]},
+{t:"What's a green flag that makes you notice someone?",p:"What behaviour makes you think, 'I like that about them'?",type:"text"},
+{t:"Do you prefer deep conversations or playful teasing?",type:"choice",o:["Deep conversations","Playful teasing","Both, depending on the mood","A little of each is perfect"]},
+{t:"What's a song that matches your current mood in life?",p:"Song title or artist is enough.",type:"text"},
+{t:"How do you like someone to communicate when they're interested in you?",type:"choice",o:["Tell me directly","Show it through consistent effort","Flirt a little and see how it goes","Let things develop naturally","A mix of words and actions"]},
+{t:"What's one quality you hope your future partner will have?",p:"There's no wrong answer.",type:"text"},
+{t:"Do you think friendship is an important foundation for romance?",type:"choice",o:["Yes, absolutely","It helps a lot","Not always","I'm still figuring that out"]},
+{t:"What's your favourite way to spend quality time with someone special?",p:"A walk, a meal, a long talk…",type:"text"},
+{t:"When you have a difficult day, what kind of support feels best?",type:"choice",o:["Someone who listens","A hug or reassurance","Help finding a solution","A little space, then a check-in","Something that makes me laugh"]},
+{t:"What's something you'd love to try or experience with someone one day?",p:"Big adventure or simple moment — anything.",type:"text"},
+{t:"What makes you feel appreciated by another person?",type:"text"},
+{t:"If you like someone, do you usually make the first move or wait a little?",type:"choice",o:["I make the first move","I give hints and see if they notice","I wait until I feel sure","It depends on the person"]},
+{t:"One last sweet question: would you be open to getting to know each other a little more?",type:"choice",o:["Yes, I'd like that 😊","Maybe — let's see how it goes 💗","I'd rather keep it friendly 🌷","I'm not sure yet, but thank you for asking"]}
+];
+const qs=document.getElementById("questions"); let current=0;
+questions.forEach((q,i)=>{
+ const section=document.createElement("section");section.className="q";section.dataset.index=i;
+ const label=document.createElement(q.type==="choice"?"fieldset":"div");if(q.type==="choice"){label.style.border="0";label.style.padding="0";label.style.margin="0";const legend=document.createElement("legend");legend.innerHTML=`<span class="qnum">${i+1}</span>${q.t}`;label.appendChild(legend)}else{const l=document.createElement("label");l.htmlFor="answer"+i;l.innerHTML=`<span class="qnum">${i+1}</span>${q.t}`;label.appendChild(l)}
+ if(q.type==="choice"){const opts=document.createElement("div");opts.className="options";q.o.forEach((v,j)=>{const l=document.createElement("label");l.className="option";l.innerHTML=`<input type="radio" name="q${i+1}" value="${v.replace(/"/g,'&quot;')}"><span>${v}</span>`;opts.appendChild(l)});label.appendChild(opts)}
+ else {if(q.p){const hint=document.createElement("p");hint.className="small";hint.textContent=q.p;label.appendChild(hint)}const input=document.createElement(q.type==="text"?"textarea":"input");input.id="answer"+i;input.name="q"+(i+1);input.maxLength=1200;input.placeholder="Write your answer here…";label.appendChild(input)}
+ section.appendChild(label);qs.appendChild(section);
+});
+function showQuestion(n){current=n;document.querySelectorAll(".q").forEach((el,i)=>el.classList.toggle("hidden",i!==n));document.getElementById("progressfill").style.width=((n+1)/questions.length*100)+"%";document.getElementById("progressText").textContent=`Question ${n+1} of ${questions.length}`;document.getElementById("backBtn").classList.toggle("hidden",n===0);document.getElementById("nextBtn").textContent=n===questions.length-1?"Send my answers 💗":"Next question →";document.getElementById("formError").classList.add("hidden");}
+document.getElementById("startBtn").onclick=()=>{document.getElementById("welcome").classList.add("hidden");document.getElementById("questionForm").classList.remove("hidden");showQuestion(0)};
+document.getElementById("backBtn").onclick=()=>{if(current>0)showQuestion(current-1)};
+document.getElementById("nextBtn").onclick=()=>{
+ const el=document.querySelector(`.q[data-index="${current}"]`);
+ if(current<questions.length-1){showQuestion(current+1);window.scrollTo({top:0,behavior:"smooth"});return;}
+ if(SCRIPT_URL.includes("PASTE_YOUR")){const e=document.getElementById("formError");e.textContent="This questionnaire isn't connected to answer storage yet. The website owner needs to add the Google Apps Script web app URL before sharing it.";e.classList.remove("hidden");return;}
+ const answers={};questions.forEach((q,i)=>{const checked=document.querySelector(`[name="q${i+1}"]:checked`);const text=document.querySelector(`[name="q${i+1}"]`);answers["Question "+(i+1)+": "+q.t]=checked?checked.value:(text?text.value.trim():"")});
+ const payload={submittedAt:new Date().toISOString(),respondentName:(document.getElementById("respondentName")?.value||"").trim(),answers};
+ document.getElementById("payload").value=JSON.stringify(payload);
+ document.getElementById("questionForm").classList.add("hidden");document.getElementById("submitting").classList.remove("hidden");
+ document.getElementById("questionForm").action=SCRIPT_URL;
+ // Register the iframe listener before submitting so a quick response is not missed.
+ let done=false;const finish=()=>{if(done)return;done=true;document.getElementById("submitting").classList.add("hidden");document.getElementById("thanks").classList.remove("hidden")};
+ document.getElementById("submitFrame").onload=()=>{setTimeout(finish,500)};
+ document.getElementById("questionForm").submit();
+ setTimeout(()=>{if(!done){document.getElementById("submitting").classList.add("hidden");document.getElementById("setupWarning").textContent="Your submission was sent to the connected endpoint. If you don't see it in the spreadsheet, check the Apps Script deployment and try again.";document.getElementById("setupWarning").classList.remove("hidden");document.getElementById("thanks").classList.remove("hidden")}},9000);
+};
+</script>
+</body>
+</html>
